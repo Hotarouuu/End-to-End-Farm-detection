@@ -6,6 +6,7 @@ from farm_detection.models.model import GNB
 from farm_detection.data.preprocess import Preprocessor
 import joblib
 import yaml
+import mlflow
 
 def load_config(path):
     with open(path, "r") as f:
@@ -14,30 +15,41 @@ def load_config(path):
 
 def train():
 
+
     config = load_config("config/model1.yaml")
 
-    df = pd.read_csv(config["data"]["train_path"])
+    # Enable autologging
+    mlflow.sklearn.autolog()
+    with mlflow.start_run():
 
-    processing = Preprocessor()
+        df = pd.read_csv(config["data"]["train_path"])
 
-    X_scaled, y_encoded = processing.fit_transform(df[config["data"]["features"]], df[config["data"]["target"]])
- 
-    train_X, test_X, train_y, test_y = train_test_split(X_scaled, y_encoded, test_size=0.2, random_state=42)
+        processing = Preprocessor()
 
-    model = GNB(priors=config["model"]["variables"]["priors"], var_smoothing=config["model"]["variables"]["var_smoothing"])
+        X_scaled, y_encoded = processing.fit_transform(df[config["data"]["features"]], df[config["data"]["target"]])
+    
+        train_X, test_X, train_y, test_y = train_test_split(X_scaled, y_encoded, test_size=0.2, random_state=42)
 
-    model.fit(train_X, train_y)
+        model = GNB(priors=config["model"]["variables"]["priors"], var_smoothing=config["model"]["variables"]["var_smoothing"])
 
-    pred = model.predict(test_X)
-    print(classification_report(test_y, pred, digits=4))
+        model.fit(train_X, train_y)
 
-    preprocessor = {
-        'scaler': processing.scaler,
-        'labelencoder' : processing.label_encoder}
+        pred = model.predict(test_X)
+        print(classification_report(test_y, pred, digits=4))
 
-    joblib.dump(preprocessor, config["artifacts"]["preprocessor_path"])
-    joblib.dump(model, config["artifacts"]["model_path"])
-    print("Model saved.")
+        preprocessor = {
+            'scaler': processing.scaler,
+            'labelencoder' : processing.label_encoder}
+
+        joblib.dump(preprocessor, config["artifacts"]["preprocessor_path"])
+        joblib.dump(model, config["artifacts"]["model_path"])
+
+        mlflow.log_artifact("config/model1.yaml")
+        mlflow.log_artifact(config["artifacts"]["preprocessor_path"])
+
+
+
+        print("Model saved.")
 
 
 if __name__ == "__main__":
