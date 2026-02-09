@@ -1,0 +1,21 @@
+data:
+  train_path: /home/lucas/Documents/Estudos/End-to-End Farm detection/data/Crop_recommendation.csv
+  features:
+    - N
+    - P
+    - K
+    - temperature
+    - ph
+    - humidity
+    - rainfall
+  target: label
+
+model:
+  type: GaussianNB
+  variables:
+    priors: null
+    var_smoothing: 1.0e-09
+
+artifacts:
+  model_path: model/gaussiannb.joblib
+  preprocessor_path: model/preprocessor.joblib

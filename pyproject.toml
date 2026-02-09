@@ -19,3 +19,7 @@ farm-detection = "farm_detection:main"
 [build-system]
 requires = ["uv_build>=0.9.13,<0.10.0"]
 build-backend = "uv_build"
+
+[tool.uv_build]
+package-dir = {"" = "src"}
+
