@@ -10,6 +10,7 @@ class Preprocessor:
     def log_transform(self, X):
         X['humidity_log'] = np.log(X['humidity'] + 1)
         X['rainfall_log'] = np.log(X['rainfall'] + 1)
+        X.drop(['humidity', 'rainfall'], axis=1, inplace=True)
         return X
 
     def fit_transform(self, X, y):

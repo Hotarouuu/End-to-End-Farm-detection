@@ -12,3 +12,6 @@ wheels/
 # MLFlow
 mlruns/
 mlflow.db
+
+# Scripts
+api_test.py

@@ -7,4 +7,7 @@ class Predictor:
 
     def predict(self, X):
         X_scaled, _ = self.preprocessor['scaler'].transform(X), None
-        return self.model.predict(X_scaled)
+        class_pred = self.model.predict(X_scaled)
+        decoded_pred = self.preprocessor['labelencoder'].inverse_transform(class_pred)
+        return class_pred, decoded_pred
+    

@@ -1,16 +1,15 @@
 [project]
 name = "farm-detection"
 version = "0.1.0"
-description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "Hotarouuu", email = "lucashondo01@gmail.com" }
-]
 requires-python = ">=3.11"
 dependencies = [
+    "fastapi>=0.128.5",
     "mlflow>=3.9.0",
     "pycaret>=3.3.2",
+    "pydantic>=2.12.5",
     "seaborn>=0.13.2",
+    "uvicorn[standard]>=0.40.0",
 ]
 
 [project.scripts]

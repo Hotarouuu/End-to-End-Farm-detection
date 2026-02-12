@@ -27,6 +27,8 @@ def train():
         processing = Preprocessor()
 
         X_scaled, y_encoded = processing.fit_transform(df[config["data"]["features"]], df[config["data"]["target"]])
+
+        print(X_scaled)
     
         train_X, test_X, train_y, test_y = train_test_split(X_scaled, y_encoded, test_size=0.2, random_state=42)
 
@@ -46,8 +48,6 @@ def train():
 
         mlflow.log_artifact("config/model1.yaml")
         mlflow.log_artifact(config["artifacts"]["preprocessor_path"])
-
-
 
         print("Model saved.")
 
