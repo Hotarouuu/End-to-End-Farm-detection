@@ -1,4 +1,3 @@
-from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 import pandas as pd
@@ -19,6 +18,9 @@ def train():
     config = load_config("config/model1.yaml")
 
     # Enable autologging
+
+
+    mlflow.set_experiment("Naive Bayes Experiment")
     mlflow.sklearn.autolog()
     with mlflow.start_run():
 

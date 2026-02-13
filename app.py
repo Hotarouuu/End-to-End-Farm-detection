@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from src.farm_detection.models.predict import Predictor
 
+# Loading the model before the API to avoid loading it everytime the API is requested
+
 model = Predictor(model_path="model/gaussiannb.joblib", 
                       preprocessor_path="model/preprocessor.joblib")
 
