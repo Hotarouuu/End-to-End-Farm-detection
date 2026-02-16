@@ -20,10 +20,9 @@ The project covers the complete pipeline, from exploratory data analysis and pre
   * [1. Data Exploration and Processing](#1-data-exploration-and-processing)
   * [2. Feature Engineering](#2-feature-engineering)
   * [3. Feature Store](#3-feature-store)
-  * [4. Modeling](#4-modeling)
-  * [5. Model Training and Validation](#5-model-training-and-validation)
-  * [6. Registry and Tracking with MLFlow](#6-registry-and-tracking-with-mlflow)
-  * [7. Model Serving with REST API](#7-model-serving-with-rest-api)
+  * [4. Modeling, Training and Validation](#4-modeling-training-and-validation)
+  * [5. Registry and Tracking with MLFlow](#5-registry-and-tracking-with-mlflow)
+  * [6. Model Serving with REST API](#6-model-serving-with-rest-api)
 * [Conclusion](#conclusion)
 
 ---
@@ -35,7 +34,13 @@ The project covers the complete pipeline, from exploratory data analysis and pre
 
 ## Technologies Used
 
-* To be added
+* Scikit-Learn
+* MLFlow
+* FastAPI
+* Uvicorn
+* Pycaret
+* Pydantic
+* Seaborn
 
 ---
 
@@ -49,7 +54,7 @@ The project covers the complete pipeline, from exploratory data analysis and pre
 
 ### 2. Feature Engineering
 
-* To be added
+In this phase, the independent variables, also known as X, were transformed using z-score normalization to bring them onto the same scale. The target variable was transformed using LabelEncoder, as it was the only categorical feature in the dataset.
 
 ---
 
@@ -59,25 +64,19 @@ The project covers the complete pipeline, from exploratory data analysis and pre
 
 ---
 
-### 4. Modeling
+### 4. Modeling, Training and Validation
 
-* To be added
-
----
-
-### 5. Model Training and Validation
-
-* To be added
+In this phase, the Pycaret library was used to test models. Since this project is not focused on model performance, the best model trained and tested by Pycaret was selected.
 
 ---
 
-### 6. Registry and Tracking with MLFlow
+### 5. Registry and Tracking with MLFlow
 
-* To be added
+In this phase, we used MLFlow's autolog feature to track and log the experiments we conducted. The only manual logging was done for the model1.yaml file and the preprocessing model.
 
 ---
 
-### 7. Model Serving with REST API
+### 6. Model Serving with REST API
 
 * To be added
 
@@ -86,3 +85,4 @@ The project covers the complete pipeline, from exploratory data analysis and pre
 ## Conclusion
 
 * To be added
+
