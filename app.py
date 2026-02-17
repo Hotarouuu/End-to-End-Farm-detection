@@ -37,6 +37,10 @@ app = FastAPI()
 logging.info("FastAPI application started successfully")
 logging.info("Defining the /predict endpoint")
 
+@app.get("/")
+def read_root():
+    logging.info("Received request at root endpoint")
+    return {"message": "Welcome to the Farm Detection API!"}
 
 @app.post("/predict")
 def predict(data: User):

@@ -84,7 +84,6 @@ def train():
 
         pred = model.predict(test_X)
         print(classification_report(test_y, pred, digits=4))
-        f1_score = f1_score(test_y, pred)
 
         logging.info(
             "Model training completed. Classification report:\n{}".format(
