@@ -37,6 +37,7 @@ def predict(data: User):
     logging.info("Input data for prediction: {}".format(input_data)) 
     prediction, label = model.predict(input_data)
     logging.info("Prediction made successfully. Prediction: {}, Label: {}".format(prediction, label))
+    
     return {"prediction": int(prediction[0]), "label": str(label)}
 
 
