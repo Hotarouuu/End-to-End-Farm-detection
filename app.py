@@ -3,17 +3,24 @@ from pydantic import BaseModel
 from src.farm_detection.models.predict import Predictor
 import logging
 
-logging.basicConfig(filename= './logs/api_log.log',level=logging.DEBUG, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    filename="./logs/api_log.log",
+    level=logging.DEBUG,
+    filemode="w",
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 # Loading the model before the API to avoid loading it everytime the API is requested
 
 logging.info("Loading the model and preprocessor for prediction")
 
-model = Predictor(model_path="model/gaussiannb.joblib", 
-                      preprocessor_path="model/preprocessor.joblib")
+model = Predictor(
+    model_path="model/gaussiannb.joblib", preprocessor_path="model/preprocessor.joblib"
+)
 
 logging.info("Model and preprocessor loaded successfully")
 logging.info("Starting the FastAPI application")
+
 
 class User(BaseModel):
     N: int
@@ -30,14 +37,17 @@ app = FastAPI()
 logging.info("FastAPI application started successfully")
 logging.info("Defining the /predict endpoint")
 
+
 @app.post("/predict")
 def predict(data: User):
     logging.info("Received prediction request with data: {}".format(data))
-    input_data = [list(data.model_dump().values())]   
-    logging.info("Input data for prediction: {}".format(input_data)) 
+    input_data = [list(data.model_dump().values())]
+    logging.info("Input data for prediction: {}".format(input_data))
     prediction, label = model.predict(input_data)
-    logging.info("Prediction made successfully. Prediction: {}, Label: {}".format(prediction, label))
-    
+    logging.info(
+        "Prediction made successfully. Prediction: {}, Label: {}".format(
+            prediction, label
+        )
+    )
+
     return {"prediction": int(prediction[0]), "label": str(label)}
-
-

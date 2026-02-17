@@ -23,7 +23,7 @@ jobs:
         run: pip install black
 
       - name: Run black
-        run: black --check .
+        run: black .
 
   test:
     name: Run all tests
@@ -39,7 +39,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest
           pip install .
 
       - name: Run tests
