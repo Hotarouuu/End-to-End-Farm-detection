@@ -54,17 +54,22 @@ jobs:
 
       - name: Build and run Docker containers
         run: docker compose up -d --build
-      - name: Debug API logs
-        run: docker compose logs api
 
       - name: Wait for containers
-        run: sleep 15 
+        run: sleep 30
 
       - name: Check if API is running
         run: curl -f http://localhost:8000/ || exit 1
 
       - name: Check if MLflow is running
-        run: curl -f http://mlflow:5000/ || exit 1
+        run: curl -f http://localhost:5000/ || exit 1
+
+      - name: Show Container Logs on Failure
+        if: failure()
+        run: |
+          docker compose logs api
+          docker compose logs mlflow
+          docker ps -a
 
       - name: Tear down
         if: always() # Garante que os containers parem mesmo se o curl falhar
