@@ -48,17 +48,6 @@ jobs:
     name: Build containers
     needs: [black, test] # Garante que o build só ocorra se o CI passar
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Build and run Docker containers
-        run: docker compose up -d --build
-
-  conteiners_test:
-    name: Testing containers
-    needs: build
-    runs-on: ubuntu-latest
     services:
       api:
         image: end-to-end-mlops-api:latest
@@ -69,6 +58,11 @@ jobs:
         ports:
           - 5000:5000
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and run Docker containers
+        run: docker compose up -d --build
       - name: Wait for containers
         run: sleep 15 
 
