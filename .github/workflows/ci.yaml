@@ -67,9 +67,7 @@ jobs:
       - name: Show Container Logs on Failure
         if: failure()
         run: |
-          docker compose logs end-to-end-mlops-api-1
-          docker compose logs end-to-end-mlops-mlflow-1
-          docker ps -a
+          docker compose logs
 
       - name: Tear down
         if: always() # Garante que os containers parem mesmo se o curl falhar
