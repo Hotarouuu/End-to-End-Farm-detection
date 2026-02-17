@@ -59,10 +59,10 @@ jobs:
         run: sleep 15 
 
       - name: Check if API is running
-        run: curl -f http://localhost:8000/ || exit 1
+        run: curl -f http://api:8000/ || exit 1
 
       - name: Check if MLflow is running
-        run: curl -f http://localhost:5000/ || exit 1
+        run: curl -f http://mlflow:5000/ || exit 1
 
       - name: Tear down
         if: always() # Garante que os containers parem mesmo se o curl falhar
