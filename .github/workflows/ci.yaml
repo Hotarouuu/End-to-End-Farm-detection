@@ -54,6 +54,9 @@ jobs:
 
       - name: Build and run Docker containers
         run: docker compose up -d --build
+      - name: Debug API logs
+        run: docker compose logs api
+
       - name: Wait for containers
         run: sleep 15 
 
