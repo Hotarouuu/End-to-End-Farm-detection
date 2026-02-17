@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from src.farm_detection.models.predict import Predictor
 import logging
 
-logging.basicConfig(filename= '/home/lucas/Documents/Estudos/End-to-End Farm detection/logs/api_log.log',level=logging.DEBUG, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename= './logs/api_log.log',level=logging.DEBUG, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Loading the model before the API to avoid loading it everytime the API is requested
 

@@ -1,0 +1,21 @@
+services:
+
+  api:
+    build: .
+    command: uvicorn app:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+
+  mlflow:
+    build: .
+    command: mlflow server --host 0.0.0.0 --port 5000
+
+    environment:
+      - MLFLOW_SERVER_ALLOWED_HOSTS=*
+
+    ports:
+      - "5000:5000"
+
+  trainer:
+    build: .
+    command: python src/farm_detection/models/training.py

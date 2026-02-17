@@ -7,7 +7,7 @@ import joblib
 import yaml
 import mlflow
 import logging 
-logging.basicConfig(filename= '/home/lucas/Documents/Estudos/End-to-End Farm detection/logs/training_log.log',level=logging.DEBUG, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename= './logs/training_log.log',level=logging.DEBUG, filemode='w', format='%(asctime)s - %(levelname)s - %(message)s')
 
 def load_config(path):
     with open(path, "r") as f:
@@ -16,10 +16,14 @@ def load_config(path):
 
 def train():
 
-    config = load_config("config/model1.yaml")
+    config = load_config("./config/model1.yaml")
 
     # Enable autologging
 
+    logging.info("Setting up MLflow tracking URI and experiment")
+    remote_server_uri = "http://0.0.0.0:5000"
+    mlflow.set_tracking_uri(remote_server_uri)
+    logging.info("Tracking URI set to {}".format(remote_server_uri))
 
     mlflow.set_experiment("Naive Bayes Experiment")
     logging.info("Experiment set to Naive Bayes Experiment")
