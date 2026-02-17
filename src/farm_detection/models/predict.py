@@ -6,8 +6,14 @@ class Predictor:
         self.preprocessor = joblib.load(preprocessor_path)
 
     def predict(self, X):
-        X_scaled, _ = self.preprocessor['scaler'].transform(X), None
-        class_pred = self.model.predict(X_scaled)
-        decoded_pred = self.preprocessor['labelencoder'].inverse_transform(class_pred)
-        return class_pred, decoded_pred
+        try:
+            X = self.preprocessor['scaler'].transform(X)
+        except ValueError as e:
+            print(f"Error during scaling: {e}")
+            raise
+        else:
+            X_scaled, _ = self.preprocessor['scaler'].transform(X), None
+            class_pred = self.model.predict(X_scaled)
+            decoded_pred = self.preprocessor['labelencoder'].inverse_transform(class_pred)
+            return class_pred, decoded_pred
     

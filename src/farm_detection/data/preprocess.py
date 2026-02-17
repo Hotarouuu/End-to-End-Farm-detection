@@ -19,6 +19,11 @@ class Preprocessor:
         y_encoded = self.label_encoder.fit_transform(y)
         X_scaled = pd.DataFrame(X_scaled, columns=X.columns)
         return X_scaled, y_encoded
+    
+    def fit(self, X, y):
+        X = self.log_transform(X)
+        self.scaler.fit(X)
+        self.label_encoder.fit(y)
 
     def transform(self, X, y):
         X = self.log_transform(X)

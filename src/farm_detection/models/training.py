@@ -1,5 +1,5 @@
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, f1_score
 import pandas as pd
 from farm_detection.models.model import GNB
 from farm_detection.data.preprocess import Preprocessor
@@ -21,7 +21,7 @@ def train():
     # Enable autologging
 
     logging.info("Setting up MLflow tracking URI and experiment")
-    remote_server_uri = "http://0.0.0.0:5000"
+    remote_server_uri = "http://mlflow:5000"
     mlflow.set_tracking_uri(remote_server_uri)
     logging.info("Tracking URI set to {}".format(remote_server_uri))
 
@@ -61,6 +61,7 @@ def train():
 
         pred = model.predict(test_X)
         print(classification_report(test_y, pred, digits=4))
+        f1_score = f1_score(test_y, pred)
 
         logging.info("Model training completed. Classification report:\n{}".format(classification_report(test_y, pred, digits=4)))
 
