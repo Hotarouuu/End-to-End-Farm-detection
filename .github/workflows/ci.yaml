@@ -67,8 +67,8 @@ jobs:
       - name: Show Container Logs on Failure
         if: failure()
         run: |
-          docker compose logs api
-          docker compose logs mlflow
+          docker compose logs end-to-end-mlops-api-1
+          docker compose logs end-to-end-mlops-mlflow-1
           docker ps -a
 
       - name: Tear down
