@@ -18,3 +18,7 @@ api_test.py
 
 # Logs
 *.log
+
+# Pytest
+.pytest_cache/
+
