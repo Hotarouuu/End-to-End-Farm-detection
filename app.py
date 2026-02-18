@@ -2,13 +2,14 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from src.farm_detection.models.predict import Predictor
 import logging
+import sys
 
 logging.basicConfig(
-    filename="./logs/api_log.log",
     level=logging.DEBUG,
-    filemode="w",
-    format="%(asctime)s - %(levelname)s - %(message)s",
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler(sys.stdout)]
 )
+
 
 # Loading the model before the API to avoid loading it everytime the API is requested
 
