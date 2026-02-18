@@ -24,7 +24,7 @@ The emphasis of this project is on **MLOps best practices**, such as the automat
 ### **Goals:**
 - Build a fully automated pipeline covering data processing, model training, and deployment.  
 - Deploy a RESTful API to make model predictions available in a containerized environment on AWS.
-- 
+
 > **Note:** The dataset is intentionally simple. The focus of this project is not model performance or complex data, but the design of a robust and well structured architecture that follows best practices across the entire machine learning lifecycle.
 
 ---
@@ -43,7 +43,7 @@ The project architecture is modular to ensure scalability and maintainability. T
    
 5. **Model Training and Experiment Tracking:**  
 
-   Automated model training using PyCaret, with all experiments tracked in MLFlow.
+   Training the model using the Pycaret benchmark as a base, with the experiments being tracked using MLFlow.
    
 7. **Model Deployment:**  
 
@@ -137,16 +137,15 @@ end-to-end-mlops/
 The development lifecycle is divided into clear stages as follows:
 
 ### **1. Data Exploration and Preprocessing**
-- Exploration: The raw soil dataset is analyzed, missing values are handled, and redundant features are removed.
+- Exploration: The raw soil dataset is analyzed and explored.
 - Preprocessing: Features are normalized (e.g., Z-score normalization), and categorical variables are encoded using LabelEncoder.
 
 ### **2. Feature Engineering**
-- Constructed numerical and categorical features are standardized.  
-- The processed features are stored in a Feature Store for use in multiple pipelines (training, inference).
+- Numerical characteristics are standardized and categorical are processed.
 
 ### **3. Model Training and Validation**
-- PyCaret is used to rapidly benchmark models and evaluate performance metrics.  
-- Multiple algorithms are evaluated using cross-validation, and results are tracked automatically.
+- PyCaret is used to rapidly benchmark models and evaluate performance metrics.
+- Training the best model using the Pycaret benchmark as a base.
 
 ### **4. Experiment Tracking**
 - MLFlow Autologging is enabled to log all hyperparameters, training results, and performance metrics for every experiment.  
@@ -206,3 +205,4 @@ pytest tests/
 ## **License**
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+
