@@ -1,88 +1,208 @@
-# Machine Learning Engineering Project - Crop Detection
-
-## Introduction
-
-This project was developed to build an end to end machine learning solution focused on crop prediction. The goal is to recommend the most promising crop type based on soil parameters, supporting more informed agricultural decisions.
-
-The dataset is intentionally simple. The focus of this project is not model performance or complex data, but the design of a robust and well structured architecture that follows best practices across the entire machine learning lifecycle.
-
-The project covers the complete pipeline, from exploratory data analysis and preprocessing to model training, evaluation, and deployment. The final model is served through a Dockerized RESTful API, demonstrating how to organize, containerize, and expose a machine learning system in a production ready local environment without relying on cloud infrastructure.
+# **End-to-End MLOps Project - Crop Prediction**
 
 ---
 
-## Table of Contents
+## **Table of Contents**
 
-- [Introduction](#introduction)
-- [Architecture](#architecture)
-- [Technologies Used](#technologies-used)
-- [Project Structure](#project-structure)
-
-  * [1. Data Exploration and Processing](#1-data-exploration-and-processing)
-  * [2. Feature Engineering](#2-feature-engineering)
-  * [3. Feature Store](#3-feature-store)
-  * [4. Modeling, Training and Validation](#4-modeling-training-and-validation)
-  * [5. Registry and Tracking with MLFlow](#5-registry-and-tracking-with-mlflow)
-  * [6. Model Serving with REST API](#6-model-serving-with-rest-api)
-* [Conclusion](#conclusion)
+1. [Introduction](#introduction)  
+2. [Architecture Overview](#architecture-overview)  
+3. [Technologies Used](#technologies-used)  
+4. [Project Structure](#project-structure)  
+5. [Development Pipeline](#development-pipeline)  
+6. [Setup and Execution](#setup-and-execution)  
+7. [Testing](#testing)  
+8. [License](#license)
 
 ---
 
-## Architecture
+## **Introduction**
 
-<img width="2760" height="546" alt="Blank diagram" src="https://github.com/user-attachments/assets/f4ecbe19-9d86-456b-ad24-b3cb57584bb3" />
+This project introduces an **End-to-End MLOps pipeline** for building a machine learning solution focused on **crop prediction**. The core objective is to recommend the most suitable crop type based on soil parameters, enabling better agricultural decision-making.
 
+The emphasis of this project is on **MLOps best practices**, such as the automation of machine learning workflows, reproducible pipelines, version control for models, and deployment-ready APIs.
 
-## Technologies Used
-
-* Scikit-Learn
-* MLFlow
-* FastAPI
-* Uvicorn
-* Pycaret
-* Pydantic
-* Seaborn
+### **Goals:**
+- Build a fully automated pipeline covering data processing, model training, and deployment.  
+- Deploy a RESTful API to make model predictions available in a containerized environment on AWS.
+- 
+> **Note:** The dataset is intentionally simple. The focus of this project is not model performance or complex data, but the design of a robust and well structured architecture that follows best practices across the entire machine learning lifecycle.
 
 ---
 
-## Project Structure
+## **Architecture Overview**
 
-### 1. Data Exploration and Processing
+The project architecture is modular to ensure scalability and maintainability. The following components are included in the pipeline:
 
-* To be added
+1. **Data Exploration and Processing:**   
 
----
+   Initial exploration of soil datasets, data cleaning, and preprocessing.
+   
+3. **Feature Engineering:**  
 
-### 2. Feature Engineering
+   Features are preprocessed after the Data Exploration.
+   
+5. **Model Training and Experiment Tracking:**  
 
-In this phase, the independent variables, also known as X, were transformed using z-score normalization to bring them onto the same scale. The target variable was transformed using LabelEncoder, as it was the only categorical feature in the dataset.
+   Automated model training using PyCaret, with all experiments tracked in MLFlow.
+   
+7. **Model Deployment:**  
 
----
+   The trained model is provided as a RESTful API, allowing external services to request predictions.
+   
+9. **Continuous Integration/Deployment:**  
 
-### 3. Feature Store
-
-* To be added
-
----
-
-### 4. Modeling, Training and Validation
-
-In this phase, the Pycaret library was used to test models. Since this project is not focused on model performance, the best model trained and tested by Pycaret was selected.
-
----
-
-### 5. Registry and Tracking with MLFlow
-
-In this phase, we used MLFlow's autolog feature to track and log the experiments we conducted. The only manual logging was done for the model1.yaml file and the preprocessing model.
+   Using **GitHub Actions** for running tests and deploying services.
+   
 
 ---
 
-### 6. Model Serving with REST API
+### **Architecture Diagram (It will change)**
 
-* To be added
+Below is the general solution diagram that represents the system flow:
+
+![Architecture Diagram](https://github.com/user-attachments/assets/f4ecbe19-9d86-456b-ad24-b3cb57584bb3)
 
 ---
 
-## Conclusion
+## **Technologies Used**
 
-* To be added
+### Core Libraries:
+- Scikit-Learn 
+- PyCaret 
+- MLFlow 
+### Backend and Deployment:
+- FastAPI  
+- Uvicorn 
+- Docker
+- Docker Compose 
 
+### Data Handling and Visualization:
+- Pandas 
+- Seaborn   
+- Pydantic 
+
+### Integration and CI/CD:
+- GitHub Actions  
+- Pytest 
+
+---
+
+## **Project Structure**
+
+The project is organized as follows:
+
+```
+end-to-end-mlops/
+│
+├── notebooks/
+│   └── Data exploration and experimentation notebooks.
+│
+├── data/
+│   └── Datasets used for training and testing.
+│
+├── config/
+│   └── Configuration files for the pipeline (e.g., YAML, JSON).
+│
+├── model/
+│   └── Trained models, saved checkpoints, and model artifacts.
+│
+├── src/
+│   ├── Preprocessing scripts.
+│   ├── Training pipeline.
+│   └── Utility modules for logging, feature engineering, etc.
+│
+├── tests/
+│   └── Unit and integration test scripts.
+│
+├── Dockerfile
+│   └── Instructions to containerize the API and training scripts.
+│
+├── compose.yaml
+│   └── Docker Compose file that orchestrates services (API, training, MLFlow).
+│
+├── app.py
+│   └── FastAPI script serving trained models as a REST API.
+│
+├── pyproject.toml
+│   └── Lists project dependencies and environment configuration.
+│
+└── README.md
+    └── Overview of the project (current file).
+```
+
+---
+
+## **Development Pipeline**
+
+The development lifecycle is divided into clear stages as follows:
+
+### **1. Data Exploration and Preprocessing**
+- Exploration: The raw soil dataset is analyzed, missing values are handled, and redundant features are removed.
+- Preprocessing: Features are normalized (e.g., Z-score normalization), and categorical variables are encoded using LabelEncoder.
+
+### **2. Feature Engineering**
+- Constructed numerical and categorical features are standardized.  
+- The processed features are stored in a Feature Store for use in multiple pipelines (training, inference).
+
+### **3. Model Training and Validation**
+- PyCaret is used to rapidly benchmark models and evaluate performance metrics.  
+- Multiple algorithms are evaluated using cross-validation, and results are tracked automatically.
+
+### **4. Experiment Tracking**
+- MLFlow Autologging is enabled to log all hyperparameters, training results, and performance metrics for every experiment.  
+- Manual logs are added for preprocessing steps and specific configurations.
+
+### **5. Model Deployment**
+- The trained model is deployed as an API using FastAPI.
+- The API exposes endpoints for making predictions with the trained model.  
+- All services are containerized using Docker for easy distribution.
+- Deployed in AWS EC2 using Github Actions
+
+---
+
+## **Setup and Execution**
+
+### Prerequisites:
+- **Python 3.8+**
+- **Docker and Docker-Compose**
+
+### Installation Steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Hotarouuu/end-to-end-mlops.git
+   cd end-to-end-mlops
+   ```
+
+2. Build containers:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. Access the API documentation:
+   Visit [http://localhost:8000/docs](http://localhost:8000/docs) where you can test the endpoints.
+
+---
+
+## **Testing**
+
+Automated testing ensures the pipeline functions reliably. The following testing layers are included:
+
+1. **Unit Tests:**  
+   Validate individual components like preprocessing, feature engineering, and model inference functions.  
+
+2. **Integration Tests:**  
+   Verify the interaction between multiple modules, including end-to-end pipeline workflows.
+
+### Run Tests:
+To execute all tests, run the following:
+```bash
+pytest tests/
+```
+
+---
+
+
+## **License**
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
