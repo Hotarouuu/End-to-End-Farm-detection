@@ -109,7 +109,6 @@ end-to-end-mlops/
 ├── src/
 │   ├── Preprocessing scripts.
 │   ├── Training pipeline.
-│   └── Utility modules for logging, feature engineering, etc.
 │
 ├── tests/
 │   └── Unit and integration test scripts.
@@ -205,4 +204,5 @@ pytest tests/
 ## **License**
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+
 
