@@ -74,7 +74,7 @@ jobs:
         run: docker compose down
 
   deploy:
-    name: Deploy to EC2 # Running only the API for now
+    name: Deploy to EC2 
     needs: [black, test, build] # Garante que o deploy só ocorra se o CI passar
     runs-on: ubuntu-latest
 
@@ -103,7 +103,9 @@ jobs:
           cd /home/ubuntu/app
           docker compose down
           docker compose build api
-          docker compose run api 
+          docker compose build mlflow
+          docker compose run api -p 8000:8000 -d
+          docker compose run mlflow -p 5000:5000 -d
 
 
 
