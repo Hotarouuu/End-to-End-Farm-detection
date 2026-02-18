@@ -54,4 +54,4 @@ def predict(data: User):
         )
     )
 
-    return {"prediction": int(prediction[0]), "label": str(label)}
+    return {"prediction": int(prediction[0]), "label": label}
