@@ -104,8 +104,9 @@ jobs:
           docker compose down
           docker compose build api
           docker compose build mlflow
-          docker compose run api -p 8000:8000 -d
-          docker compose run mlflow -p 5000:5000 -d
+          docker compose up -d api
+          docker compose up -d mlflow
+
 
 
 
