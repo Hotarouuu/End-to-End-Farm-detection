@@ -91,7 +91,7 @@ jobs:
         SOURCE: "./"
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        TARGET: "/home/ec2-user/app"
+        TARGET: "/home/ubuntu/app"
 
     - name: Run Docker Compose on EC2
       uses: appleboy/ssh-action@v1.0.3
@@ -100,7 +100,7 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          cd /home/ec2-user/app
+          cd /home/ubuntu/app
           docker compose down
           docker compose up -d --build
 
