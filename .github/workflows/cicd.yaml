@@ -74,7 +74,7 @@ jobs:
         run: docker compose down
 
   deploy:
-    name: Deploy to EC2
+    name: Deploy to EC2 # Running only the API for now
     needs: [black, test, build] # Garante que o deploy só ocorra se o CI passar
     runs-on: ubuntu-latest
 
@@ -102,7 +102,9 @@ jobs:
         script: |
           cd /home/ubuntu/app
           docker compose down
-          docker compose up -d --build
+          docker compose build api
+          docker compose run api 
+
 
 
   
