@@ -174,7 +174,7 @@ The development lifecycle is divided into clear stages as follows:
 
 2. Build containers:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 3. Access the API documentation:
