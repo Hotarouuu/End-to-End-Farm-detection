@@ -109,7 +109,6 @@ end-to-end-mlops/
 ├── src/
 │   ├── Preprocessing scripts.
 │   ├── Training pipeline.
-│   └── Utility modules for logging, feature engineering, etc.
 │
 ├── tests/
 │   └── Unit and integration test scripts.
@@ -175,7 +174,7 @@ The development lifecycle is divided into clear stages as follows:
 
 2. Build containers:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 3. Access the API documentation:
@@ -205,4 +204,5 @@ pytest tests/
 ## **License**
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+
 
